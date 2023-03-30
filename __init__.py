@@ -18,7 +18,7 @@ def upload():
 	filename = file.filename
 	file.save('/'.join((app.config['UPLOAD_FOLDER'],filename)))
 	datetime = get_current_datetime()
-	full_path = f'{request.remote_addr}/download/{filename}'
+	full_path = f'{request.url_root}download/{filename}'
 
 	return render_template('download.html', file=full_path, filename=filename, datetime=datetime)
 

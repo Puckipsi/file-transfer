@@ -47,10 +47,11 @@
             background-color: #4CAF50;
             color: #fff;
             padding: 10px 20px;
-            border: none;
-            border-radius: 5px;
+            border: 0;
+            border-radius: 8px;
             font-size: 16px;
             cursor: pointer;
+           
         }
 
         button:hover {
@@ -90,6 +91,9 @@
         <form action="/upload" method="post" enctype="multipart/form-data">
           <input type="file" name="file">
           <button type="submit" name="submit">Upload File</button>
+        </form>
+        <form action="/view-uploads" method="get" enctype="multipart/form-data">
+          <button action="submit">View Uploads</button>
         </form>
       </div>
     </div>

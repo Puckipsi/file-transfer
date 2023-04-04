@@ -55,6 +55,7 @@
 			<tr>
 				<th>Filename</th>
 				<th>Upload Date</th>
+				<th>Action</th>
 				<th></th>
 			</tr>
 		</thead>
@@ -64,6 +65,7 @@
 				<td>{{file.file}}</td>
                 <td>{{file.upload_date}}</td>
 				<td><button><a href="{{ url_for('download', file=file.file) }}">Download</a></button></td>
+				<td><button><a href="{{ url_for('remove', file=file.file) }}">Remove</a></button></td>
             </tr>
 			{% endfor %}
 		</tbody>

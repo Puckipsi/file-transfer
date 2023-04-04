@@ -14,7 +14,7 @@ class FileService:
     def start_page(self):
         return render_template("upload.html")
 
-    
+
     def upload(self):
         file = request.files["file"]
         filename = file.filename
@@ -25,7 +25,7 @@ class FileService:
         file.save("/".join((self.get_upload_folder(), filename)))
         datetime = get_current_datetime()
         full_path = f"{request.url_root}download/{filename}"
-        
+
         return render_template(
             "download.html", file=full_path, filename=filename, datetime=datetime
         )
@@ -34,6 +34,16 @@ class FileService:
     def download(self, file):
         file_path = os.path.join(app.root_path, self.get_upload_folder(), file)
         return send_file(file_path, as_attachment=True)
+    
+    
+    def remove(self, file):
+        file_path = os.path.join(app.root_path, self.get_upload_folder(), file)
+    
+        try:
+            os.remove(file_path)
+        finally:
+            files = self.file_maneger.load_uploaded_files(self.get_upload_folder())
+            return render_template("display.html", files=files)
 
 
     def view_uploads(self):

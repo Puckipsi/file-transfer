@@ -10,6 +10,6 @@ class FileManager:
         dir_files = os.listdir(dir_path)
         files = [{
 		    'file': file,
-	        'upload_date': time.ctime(os.path.getctime(f"{dir_path}/{file}"))} for file in dir_files]  
+	        'upload_date': time.ctime(os.path.getctime(f"{dir_path}/{file}"))} for file in sorted(dir_files)]  
         
         return files

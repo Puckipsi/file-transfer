@@ -2,7 +2,7 @@ import os
 from __init__ import app
 from flask import request, render_template, send_file
 from config import get_current_datetime
-
+from utils.timing import timing
 
 
 class FileService:
@@ -16,6 +16,14 @@ class FileService:
 
 
     def upload(self):
+        full_path, filename, datetime, duration = self.get_uploading_attributes()
+
+        return render_template(
+            "download.html", file=full_path, filename=filename, datetime=datetime, duration=duration
+        )
+    
+    @timing 
+    def get_uploading_attributes(self):
         file = request.files["file"]
         filename = file.filename
 
@@ -26,10 +34,8 @@ class FileService:
         datetime = get_current_datetime()
         full_path = f"{request.url_root}download/{filename}"
 
-        return render_template(
-            "download.html", file=full_path, filename=filename, datetime=datetime
-        )
-
+        return full_path, filename, datetime   
+    
 
     def download(self, file):
         file_path = os.path.join(app.root_path, self.get_upload_folder(), file)

@@ -9,5 +9,5 @@ def timing(func):
         result = func(*args, **kwargs)
         end_time = time.time()
         duration = end_time - start_time
-        return *result, duration
+        return result, duration
     return wrapper

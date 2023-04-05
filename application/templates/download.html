@@ -29,5 +29,8 @@
 	<p>Dowload link: {{ file }} </p>
 	<p>Upload duration: {{ duration }} seconds</p>
 	<p><a href="{{ url_for('download', file=filename) }}">Download</a></p>
+	<button onclick="window.location='/'"
+		class="btn btn-primary" 
+		style="position: fixed; top: 40px; left: 60px; padding: 12px 25px; border-radius: 20px;">Main page</button>
 </body>
 </html>

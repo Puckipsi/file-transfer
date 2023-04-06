@@ -14,3 +14,10 @@ class FileManager:
 	        'upload_date': time.ctime(os.path.getctime(f"{dir_path}/{file}"))} for file in sorted(dir_files)]  
         
         return files
+    
+
+    def get_file_path(self, folder_name, file):
+        file_path = os.path.join(app.root_path, folder_name, file)
+        return file_path
+    
+    

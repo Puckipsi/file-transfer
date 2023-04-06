@@ -43,18 +43,19 @@ class FileService:
     
 
     def download(self, file):
-        file_path = os.path.join(app.root_path, self.get_upload_folder(), file)
+        file_path = self.file_maneger.get_file_path(self.get_upload_folder(), file)
         return send_file(file_path, as_attachment=True)
     
     
     def remove(self, file):
-        file_path = os.path.join(app.root_path, self.get_upload_folder(), file)
-    
+        file_path = self.file_maneger.get_file_path(self.get_upload_folder(), file)
+
         try:
             os.remove(file_path)
+        except Exception as e:
+            print("An error occurred while removing file", e)
         finally:
-            files = self.file_maneger.load_uploaded_files(self.get_upload_folder())
-            return render_template("display.html", files=files)
+            return self.view_uploads()
 
 
     def view_uploads(self):
